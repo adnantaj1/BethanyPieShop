@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
 {
-    public partial class Product
+    public abstract partial class Product: ICloneable
     {
 
         private int id;
         private string name = string.Empty;
         private string? description;
 
-        private int maxItemsInStock = 0;
+        protected int maxItemsInStock = 0;
 
         private UnitType unitType;
         private int amountInStock = 0;
@@ -59,8 +59,8 @@ namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
 
         public UnitType UnitType { get; set; }
 
-        public int AmountInStock { get; private set; }
-        public bool IsBelowStockTreshold { get; private set; }
+        public int AmountInStock { get; protected set; }
+        public bool IsBelowStockTreshold { get; protected set; }
 
 
         public Product(int id) : this(id, string.Empty)
@@ -89,7 +89,7 @@ namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
             }
         }
 
-        public void UseProduct(int items)
+        public virtual void UseProduct(int items)
         {
             if (items <= AmountInStock)
             {
@@ -106,12 +106,14 @@ namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
             }
         }
 
-        public void IncreaseStock()
-        {
-            AmountInStock++;
-        }
+        //public virtual void IncreaseStock()
+        //{
+        //    AmountInStock++;
+        //}
 
-        public void IncreaseStock(int amount)
+        public abstract void IncreaseStock();
+
+        public virtual void IncreaseStock(int amount)
         {
             int newStock = AmountInStock + amount;
 
@@ -131,7 +133,7 @@ namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
             }
         }
 
-        private void DecreaseStock(int items, string reason)
+        protected virtual void DecreaseStock(int items, string reason)
         {
             if (items <= AmountInStock)
             {
@@ -148,7 +150,7 @@ namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
             Log(reason);
         }
 
-        public void UpdateLowStock()
+        public virtual void UpdateLowStock()
         {
             if (AmountInStock < StockTreshold)//for now a fixed value
             {
@@ -156,12 +158,12 @@ namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
             }
         }
 
-        public string DisplayDetailsShort()
+        public virtual string DisplayDetailsShort()
         {
             return $"{Id}. {Name} \n{AmountInStock} items in stock";
         }
 
-        public string DisplayDetailsFull()
+        public virtual string DisplayDetailsFull()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -177,7 +179,7 @@ namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
             //return DisplayDetailsFull("");
         }
 
-        public string DisplayDetailsFull(string extraDetails)
+        public virtual string DisplayDetailsFull(string extraDetails)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -192,5 +194,7 @@ namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
 
             return sb.ToString();
         }
+
+        public abstract object Clone();
     }
 }

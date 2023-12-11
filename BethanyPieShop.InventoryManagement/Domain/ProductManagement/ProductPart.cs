@@ -19,13 +19,13 @@ namespace BethanyPieShop.InventoryManagement.Domain.ProductManagement
         }
 
 
-        private void Log(string message)
+        protected void Log(string message)
         {
             //this could be written to a file
             Console.WriteLine(message);
         }
 
-        private string CreateSimpleProductRepresentation()
+        protected string CreateSimpleProductRepresentation()
         {
             return $"Product {Id} ({Name})";
         }

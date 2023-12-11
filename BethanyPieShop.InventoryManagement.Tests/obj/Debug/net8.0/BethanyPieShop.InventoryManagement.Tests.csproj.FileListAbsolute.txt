@@ -103,3 +103,4 @@ C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.Inventor
 C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.InventoryManagement.Tests\obj\Debug\net8.0\BethanyPieShop.InventoryManagement.Tests.pdb
 C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.InventoryManagement.Tests\obj\Debug\net8.0\BethanyPieShop.InventoryManagement.Tests.genruntimeconfig.cache
 C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.InventoryManagement.Tests\obj\Debug\net8.0\ref\BethanyPieShop.InventoryManagement.Tests.dll
+C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.InventoryManagement.Tests\obj\Debug\net8.0\BethanyPieShop.InventoryManagement.Tests.sourcelink.json

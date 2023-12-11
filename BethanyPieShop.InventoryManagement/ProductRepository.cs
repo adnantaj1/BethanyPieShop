@@ -1,5 +1,7 @@
-﻿using BethanyPieShop.InventoryManagement.Domain.General;
+﻿using BethanyPieShop.InventoryManagement.Domain.Contracts;
+using BethanyPieShop.InventoryManagement.Domain.General;
 using BethanyPieShop.InventoryManagement.Domain.ProductManagement;
+using System.Text;
 
 
 namespace BethanyPieShop.InventoryManagement
@@ -73,7 +75,38 @@ namespace BethanyPieShop.InventoryManagement
                         unitType = UnitType.PerItem;//default value
                     }
 
-                    Product product = new Product(productId, name, description, new Price() { ItemPrice = itemPrice, Currency = currency }, unitType, maxItemsInStock);
+                    string productType = productSplits[7];
+                    Product product = null;
+
+                    switch (productType)
+                    {
+                        case "1":
+                            success = int.TryParse(productSplits[8], out int amountPerBox);
+                            if (!success)
+                                amountPerBox = 1;
+                            product = new BoxedProduct(productId, name, description, new Price()
+                            { ItemPrice = itemPrice, Currency = currency }, 
+                            maxItemsInStock, amountPerBox);
+                            break;
+
+                        case "2":
+                            product = new FreshProduct(productId, name, description, new Price()
+                            { ItemPrice = itemPrice, Currency = currency }, unitType, maxItemsInStock);
+                            break;
+
+                        case "3":
+                            product = new BulkProduct(productId, name, description, new Price()
+                            { ItemPrice = itemPrice, Currency = currency }, maxItemsInStock);
+                            break;
+
+                        case "4":
+                            product = new RegularProduct(productId, name, description, new Price()
+                            { ItemPrice = itemPrice, Currency = currency }, unitType, maxItemsInStock);
+                            break;
+                    }
+
+                    //Product product = new Product(productId, name, description, new Price() 
+                    //{ ItemPrice = itemPrice, Currency = currency }, unitType, maxItemsInStock);
 
 
                     products.Add(product);
@@ -106,6 +139,23 @@ namespace BethanyPieShop.InventoryManagement
             }
 
             return products;
+        }
+
+        public void SaveToFile(List<ISaveable> saveables)
+        {
+            StringBuilder sb = new StringBuilder();
+            string path = $"{directory}{productsFileName}";
+
+            foreach(var item in saveables)
+            {
+                sb.Append(item.CoverToStringForSaving());
+                sb.Append(Environment.NewLine);
+            }
+            File.WriteAllText(path, sb.ToString());
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Saved items successfully");
+            Console.ResetColor();
         }
     }
 }

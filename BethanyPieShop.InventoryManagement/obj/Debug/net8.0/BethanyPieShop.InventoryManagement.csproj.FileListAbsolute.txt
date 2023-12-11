@@ -12,3 +12,4 @@ C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.Inventor
 C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.InventoryManagement\obj\Debug\net8.0\BethanyPieShop.InventoryManagement.pdb
 C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.InventoryManagement\obj\Debug\net8.0\BethanyPieShop.InventoryManagement.genruntimeconfig.cache
 C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.InventoryManagement\obj\Debug\net8.0\ref\BethanyPieShop.InventoryManagement.dll
+C:\Development\Dotnet\BethanyPieShop.InventoryManagement\BethanyPieShop.InventoryManagement\obj\Debug\net8.0\BethanyPieShop.InventoryManagement.sourcelink.json
